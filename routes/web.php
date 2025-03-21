@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//
 
+Route::post('index', [UsersController::class, 'index']);
+
+Route::post('/added', [UsersController::class, 'added']);
 
 require __DIR__ . '/auth.php';
 
