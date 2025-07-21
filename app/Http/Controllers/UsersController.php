@@ -7,16 +7,15 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index() {
-        return view('posts.index');
+        return view('../posts/index');
     }
 
     public function added() {
-        return view('auth.added');
+        return view('/added');
+    }
+
+    public function login() {
+        return view('/login');
     }
 }
