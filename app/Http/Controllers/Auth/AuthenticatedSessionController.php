@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('auth.login');//login.bladeを表示
     }
 
     /**
@@ -25,11 +25,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->authenticate();//email,passwordなどのログイン処理
 
-        $request->session()->regenerate();
+        $request->session()->regenerate();//セッションIDの再生成は、悪意のあるユーザーがアプリケーションに対するセッション固定攻撃を防ぐため行います
 
-        return redirect()->intended('top');
+        return redirect()->intended('top');//redirectはURLに飛ぶ
+    }
+
+
+
+    public function logout(Request $request)
+    {
+    Auth::logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect('login');
     }
 
 }

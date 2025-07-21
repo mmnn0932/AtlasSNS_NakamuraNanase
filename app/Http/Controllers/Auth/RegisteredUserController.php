@@ -33,10 +33,10 @@ class RegisteredUserController extends Controller
         User::create([
             'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password),//Userテーブルにレコードを追加する
         ]);
 
-        return redirect('added');
+        return redirect('added');//redirectはURLに飛ぶ
     }
 
     public function added(): View

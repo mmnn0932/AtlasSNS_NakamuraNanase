@@ -16,15 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
+//
 require __DIR__ . '/auth.php';
 
-Route::get('top', [PostsController::class, 'index']);
 
-Route::get('profile', [ProfileController::class, 'profile']);
+
+Route::get('top', [PostsController::class, 'index'])->name('index');
+
+Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 
 Route::get('search', [UsersController::class, 'index']);
 
 Route::get('follow-list', [PostsController::class, 'index']);
 Route::get('follower-list', [PostsController::class, 'index']);
+
+//Route::get通信(URI　URLの部品, [〇〇Controller::class, 'method']);
