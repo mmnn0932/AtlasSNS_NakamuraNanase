@@ -71,7 +71,7 @@ class ProfileController extends Controller
 }
     $user->save();
 
-    return redirect()->route('pageA')->with('success', 'プロフィールを更新しました');
+    return redirect()->route('profile')->with('success', 'プロフィールを更新しました');
 }
 
 

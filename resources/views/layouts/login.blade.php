@@ -42,14 +42,14 @@
       <p>フォロー数&emsp;&emsp;{{ Auth::user()->followingCount() }}人</p>
     </div>
     <p style="text-align: right;">
-  <a href="{{ route('showFollowings') }}" class="btn btn-primary">フォローリスト</a>
+  <a href="{{ route('followlist') }}" class="btn btn-primary">フォローリスト</a>
 </p>
 
     <div>
       <p>フォロワー数&emsp;{{ Auth::user()->followerCount() }}人</p>
     </div>
     <p style="text-align: right;">
-  <a href="{{ route('showFollowed') }}" class="btn btn-primary">フォロワーリスト</a>
+  <a href="{{ route('followerlist') }}" class="btn btn-primary">フォロワーリスト</a>
 </p>
 
     <!-- 横線 -->

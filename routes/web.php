@@ -41,16 +41,15 @@ Route::post('/posts/{id}/update', [PostsController::class, 'update'])->name('pos
 Route::get('/posts/{id}/delete', [PostsController::class, 'delete'])->name('posts.delete');
 
 
-Route::get('followList', [PostsController::class, 'followList'])->name('followList');
+Route::get('/followlist',   [FollowsController::class, 'showFollowings'])->name('followlist');
+    Route::get('/followerlist', [FollowsController::class, 'showFollowed'])->name('followerlist');
 
-Route::get('followerList', [PostsController::class, 'followerList'])->name('followerList');
-
-
+/*
 Route::get('showFollowings', [FollowsController::class, 'showFollowings'])->name('showFollowings');
 
 Route::get('showFollowed', [FollowsController::class, 'showFollowed'])
 
-    ->name('showFollowed');
+    ->name('showFollowed'); */
 
 Route::post('/follow/{id}', [FollowsController::class, 'store'])->name('follow.store');
 Route::delete('/follow/{id}', [FollowsController::class, 'destroy'])->name('follow.destroy');
@@ -59,7 +58,7 @@ Route::get('search', [UsersController::class, 'create'])->name('users.search');
 
 Route::get('/search/result', [UsersController::class, 'search'])->name('users.result');
 
-Route::get('pageA', [ProfileController::class, 'pageA'])->name('pageA');
+Route::get('/profile', [ProfileController::class, 'pageA'])->name('profile');
 Route::get('/user/{id}', [ProfileController::class, 'pageB'])->name('pageB');
 
 Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
