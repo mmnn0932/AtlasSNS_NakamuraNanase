@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,28 +11,21 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
+    /* ログイン画面表示 */
     public function create(): View
     {
-        return view('auth.login');//login.bladeを表示
+        return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
+    /* ログイン */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();//email,passwordなどのログイン処理
-
-        $request->session()->regenerate();//セッションIDの再生成は、悪意のあるユーザーがアプリケーションに対するセッション固定攻撃を防ぐため行います
-
-        return redirect()->intended('top');//redirectはURLに飛ぶ
+        $request->authenticate();
+        $request->session()->regenerate();
+        return redirect()->intended(route('index'));
     }
 
-
-
+    /* ログアウト */
     public function logout(Request $request)
     {
     Auth::logout();
@@ -44,5 +36,6 @@ class AuthenticatedSessionController extends Controller
 
     return redirect('login');
     }
+
 
 }

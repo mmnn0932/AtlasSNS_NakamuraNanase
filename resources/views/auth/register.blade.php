@@ -1,26 +1,35 @@
 <x-logout-layout>
-    <!-- 適切なURLを入力してください -->
-{!! Form::open(['url' => 'register']) !!}
+    <section>
+        <div class="atlas">
+            <p class="welcome">新規ユーザー登録</p>
 
-<h2>新規ユーザー登録</h2>
+            {!! Form::open(['url' => 'register']) !!}
 
-{{ Form::label('ユーザー名') }}
-{{ Form::text('username',null,['class' => 'input']) }}
+            <div class="form-group">
+                {{ Form::label('username', 'user name') }}
+                {{ Form::text('username',null,['class' => 'input']) }}
+            </div>
 
-{{ Form::label('メールアドレス') }}
-{{ Form::email('email',null,['class' => 'input']) }}
+            <div class="form-group">
+                {{ Form::label('email', 'mail address') }}
+                {{ Form::email('email',null,['class' => 'input']) }}
+            </div>
 
-{{ Form::label('パスワード') }}
-{{ Form::text('password',null,['class' => 'input']) }}
+            <div class="form-group">
+                {{ Form::label('password', 'password') }}
+                {{ Form::password('password',['class' => 'input']) }}
+            </div>
 
-{{ Form::label('パスワード確認') }}
-{{ Form::text('password_confirmation',null,['class' => 'input']) }}
+            <div class="form-group">
+                {{ Form::label('password_confirmation', 'password confirm') }}
+                {{ Form::password('password_confirmation',['class' => 'input']) }}
+            </div>
 
-{{ Form::submit('登録') }}
+            {{ Form::submit('REGISTER', ['class' => 'btn btn-danger']) }}
 
-<p><a href="login">ログイン画面へ戻る</a></p>
+            {!! Form::close() !!}
 
-{!! Form::close() !!}
-
-
+            <p class="login-link"><a href="login">ログイン画面に戻る</a></p>
+        </div>
+    </section>
 </x-logout-layout>

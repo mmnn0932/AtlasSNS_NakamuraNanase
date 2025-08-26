@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\FollowsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,23 +18,50 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//
-
-Route::post('index', [UsersController::class, 'index']);
-
-Route::post('/added', [UsersController::class, 'added']);
-
 require __DIR__ . '/auth.php';
 
+//ログアウト
+Route::get('logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+
+// 投稿作成して保存
+Route::post('store', [PostsController::class, 'store'])->name('posts.store');
+
+// 投稿一覧//投稿取得して表示
+Route::get('index', [PostsController::class, 'index'])->name('index');
+
+// 投稿編集
+Route::get('/posts/{id}/edit', [PostsController::class, 'edit'])->name('posts.edit');
+
+// 投稿更新
+Route::post('/posts/{id}/update', [PostsController::class, 'update'])->name('posts.update');
+
+// 投稿削除
+Route::get('/posts/{id}/delete', [PostsController::class, 'delete'])->name('posts.delete');
 
 
-Route::get('top', [PostsController::class, 'index'])->name('index');
+Route::get('followList', [PostsController::class, 'followList'])->name('followList');
 
-Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+Route::get('followerList', [PostsController::class, 'followerList'])->name('followerList');
 
-Route::get('search', [UsersController::class, 'index']);
 
-Route::get('follow-list', [PostsController::class, 'index']);
-Route::get('follower-list', [PostsController::class, 'index']);
+Route::get('showFollowings', [FollowsController::class, 'showFollowings'])->name('showFollowings');
 
-//Route::get通信(URI　URLの部品, [〇〇Controller::class, 'method']);
+Route::get('showFollowed', [FollowsController::class, 'showFollowed'])
+
+    ->name('showFollowed');
+
+Route::post('/follow/{id}', [FollowsController::class, 'store'])->name('follow.store');
+Route::delete('/follow/{id}', [FollowsController::class, 'destroy'])->name('follow.destroy');
+
+Route::get('search', [UsersController::class, 'create'])->name('users.search');
+
+Route::get('/search/result', [UsersController::class, 'search'])->name('users.result');
+
+Route::get('pageA', [ProfileController::class, 'pageA'])->name('pageA');
+Route::get('/user/{id}', [ProfileController::class, 'pageB'])->name('pageB');
+
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+});

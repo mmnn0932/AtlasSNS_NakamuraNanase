@@ -1,29 +1,682 @@
-@charset "utf-8";
-
-html {}
-
-body {}
-
-/* header */
-header {
-    background: #186AC9;
+body {
+    background-color: #fff;
 }
 
-/* main content */
+.gradation {
+    background: linear-gradient(0deg, #f7f75d, #2386f2);
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 105px;
+    background-color: #0056b3;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-img {
+    height: 45px;
+    width: auto;
+    margin: 0 10px;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-right: 20px;
+}
+
+header .username {
+    font-size: 24px;
+    color: #fff;
+}
+
+.user-icon {
+    width: 56px;
+    height: 56px;
+}
+
+#dropdown {
+    position: static;
+}
+
+#dropdownToggle {
+    background: none;
+    border: none;
+}
+
+#dropdownIcon {
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+header .dropdown-menu {
+    text-align: center;
+}
+
+header .dropdown-menu li {
+    margin: 26px 0;
+}
+
+header .dropdown-menu li a {
+    font-size: 30px;
+    padding: 10px 24px;
+    color: #888;
+}
+
+header .dropdown-menu li a:hover {
+    background-color: #003366;
+    color: #fff;
+}
+
+/* ログイン */
+/* 枠内 */
+.atlas {
+    width: 360px;
+    padding: 26px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    font-family: sans-serif;
+}
+
+.input {
+    width: 100%;
+    font-size: 18px;
+    padding: 14px;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid #999;
+}
+
+.form-group label {
+    margin-bottom: 4px;
+    font-weight: 350;
+    font-size: 18px;
+    color: #fff;
+}
+
+.btn.btn-danger {
+    color: #fff;
+}
+
+input[type="submit"].btn {
+    display: block;
+    margin-left: auto;
+    font-size: 26px;
+    padding: 2px;
+    border-radius: 8px;
+}
+
+.welcome {
+    font-size: 26px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.register-link {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.login-link {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.register-link a,
+.login-link a {
+    color: #f9f9f9;
+    text-decoration: none;
+}
+
+/* 投稿ページ */
+body {
+    padding-top: 100px;
+}
+
 #row {
     display: flex;
-    flex-flow: row wrap;
+    min-height: 100vh;
 }
 
 #container {
-    flex: 0 0 80%;
+    flex: 1;
+    padding: 0 20px;
 }
 
 #side-bar {
-    flex: 0 0 19%;
-    border-left: 1px solid #727272;
+    width: 350px;
+    background-color: #fff;
+    border-left: 1px solid #000;
+    padding: 20px;
+    color: rgba(0, 0, 0, 0.9);
 }
 
-#side-drop {
-    flex: 0 0 19%;
+/* 太線 */
+.section-divider {
+    border-top: 2px solid #ccc;
+    margin-top: 20px;
+    margin-left: -170px;
+    margin-right: -50px;
+}
+
+hr.section-divider:not(.form-divider) {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* 複数線 */
+.post-block {
+    padding: 0px 30px 30px 150px;
+    padding-bottom: 6px;
+    padding-left: 130px;
+}
+
+.post-form {
+    margin: 40px 0 10px;
+    padding-left: 70px;
+    padding-right: 180px;
+}
+
+.post-form-inner {
+    display: flex;
+    gap: 15px;
+    position: relative;
+}
+
+.post-form-inner textarea {
+    flex: 1;
+    height: 130px;
+    resize: none;
+    border: none;
+    font-size: 20px;
+}
+
+.post-form textarea::placeholder {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.post-submit {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    bottom: 0px;
+    right: -5px;
+}
+
+/* 投稿一覧 */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-left {
+    display: flex;
+    gap: 20px;
+}
+
+.post-user-texts {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+}
+
+.post-content {
+    font-size: 16px;
+    color: #000;
+    margin-top: -10px;
+    word-break: break-word;
+    max-width: 80ch;
+}
+
+.post-time {
+    font-size: 14px;
+    color: #000;
+    padding-top: 2px;
+    font-family: "Arial";
+    margin-right: -10px;
+}
+
+.post-actions {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: -20px;
+}
+
+.edit-btn img,
+.delete-link img {
+    width: 32px;
+    height: auto;
+}
+
+.edit-btn img.hover,
+.delete-link img.hover-image {
+    display: none;
+}
+
+.edit-btn:hover img.default,
+.delete-link:hover img.default-image {
+    display: none;
+}
+
+.edit-btn:hover img.hover,
+.delete-link:hover img.hover-image {
+    display: inline;
+}
+
+.edit-btn,
+.edit-btn:hover,
+.delete-link,
+.delete-link:hover {
+    text-decoration: none;
+}
+
+
+
+/*ログアウト*/
+.sub-title {
+    color: #fff;
+    font-size: 40px;
+    margin: -10px;
+    font-family: sans-serif;
+}
+
+.logo-img2 {
+    height: 62px;
+    width: auto;
+}
+
+.logout-page .centered-header {
+    padding-top: 200px;
+    height: auto;
+}
+
+body.logout-page {
+    padding-top: 0;
+}
+
+.logout-page header {
+    position: static;
+    background-color: transparent;
+    padding-bottom: 30px;
+    flex-direction: column;
+}
+
+.logout-page .atlas {
+    margin-top: 20px;
+}
+
+
+.form-divider {
+    border-top: 8px solid #ddd;
+}
+
+.post-actions img {
+    width: 60px;
+    height: auto;
+}
+
+.post-actions img.hover,
+.post-actions img.default {
+    width: 60px;
+}
+
+.icon-divider {
+    border-top: 8px solid #ddd;
+    margin-left: -70px;
+    margin-right: -180px;
+}
+
+.icon-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 700px;
+    margin-left: 50px;
+}
+
+
+.modal.is-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal__content {
+    position: relative;
+    background: #fff;
+    padding: 36px;
+    max-width: 950px !important;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.modal__content .edit-btn img {
+    width: 60px !important;
+    height: auto !important;
+}
+
+.modal__content .edit-btn:hover img.default {
+    display: none !important;
+}
+
+.modal__content .edit-btn:hover img.hover {
+    display: inline !important;
+}
+
+.sidebar-divider {
+    border-top: 2px solid #ccc;
+    margin: 30px;
+    width: calc(100% + 40px);
+    /* padding: 20px × 2 対応 */
+    margin-left: -20px;
+}
+
+.profile-icon-preview {
+    width: 60px;
+    height: auto;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-form label {
+    margin: 16px;
+}
+
+.profile-form .form-row:last-child button {
+    margin-left: 250px;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    width: 200px;
+    padding: 6px 30px;
+    font-size: 20px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.form-row label {
+    width: 250px;
+    font-size: 26px;
+}
+
+.form-row input,
+.form-row textarea {
+    border: 1px solid #000;
+    width: 470px;
+}
+
+.profile-edit-container {
+    display: flex;
+    gap: 40px;
+    font-size: 24px;
+    padding: 84px;
+    margin-top: -10px;
+    margin-left: 160px;
+}
+
+.profile-edit-container,
+.profile-edit-container label,
+.profile-edit-container input,
+.profile-edit-container textarea {
+    color: #000;
+    font-family: sans-serif;
+    font-weight: 400;
+    height: 50px;
+}
+
+.profile-edit-container input[type="text"],
+.profile-edit-container input[type="email"],
+.profile-edit-container input[type="password"],
+.profile-edit-container textarea,
+.profile-edit-container input[type="file"] {
+    background-color: #f0f0f0;
+    padding-left: 10px;
+    /* 文頭余白 */
+}
+
+.profile-edit-container input[name="icon_image"] {
+    height: 110px;
+    padding: 34px 50px;
+    font-size: 20px;
+}
+
+/* bioのプレースホルダーを左上寄せに */
+.profile-edit-container textarea[name="bio"] {
+    padding: 0px 10px;
+}
+
+.user-search-button {
+    text-align: center;
+}
+
+.user-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-left: 300px;
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.follow-button {
+    margin-right: 300px;
+}
+
+.search-form-heading {
+    display: flex;
+    align-items: center;
+    margin-top: 62px;
+    margin-left: 50px;
+    margin-bottom: 62px;
+    gap: 250px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-keyword {
+    font-size: 26px;
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.search-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.search-input {
+    width: 390px;
+    height: 60px;
+    font-size: 26px;
+    border: 2px solid #888;
+    border-radius: 4px;
+    padding-left: 20px !important;
+}
+
+.search-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #fff;
+    border-radius: 6px;
+}
+
+.search-button img {
+    width: 60px;
+    height: 60px;
+}
+
+.search-word {
+    font-size: 16px;
+    margin-left: 16px;
+}
+
+.btn.btn-primary,
+.btn.btn-danger {
+    font-size: 18px;
+    padding: 6px 6px;
+    border-radius: 8px;
+    min-width: 170px;
+}
+
+.btn.btn-primary {
+    background-color: #234ecf;
+    border-color: #234ecf;
+    color: #fff;
+}
+
+.btn.btn-danger {
+    background-color: #ef5350;
+    border-color: #d32f2f;
+    color: #fff;
+}
+
+body.login-layout {
+    font-size: 20px;
+}
+
+body.login-layout input,
+body.login-layout button {
+    padding: 0.7em 1.2em;
+}
+
+body.login-layout .btn {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.post-block.typeB-profile {
+    margin-top: 40px;
+}
+
+.post-block.typeB-profile+.section-divider {
+    border-top: 8px solid #ddd;
+    margin-left: -170px;
+    margin-right: -50px;
+    margin-top: 16px;
+}
+
+.post-block.typeB-profile {
+    color: #000;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.typeB-follow-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.atlas-panel {
+    margin-top: 20px;
+    width: 360px;
+    padding: 26px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 13px;
+    text-align: center;
+    color: #fff;
+}
+
+.atlas-lead {
+    font-weight: 600;
+    font-size: 22px;
+}
+
+/* 「ようこそ！」の下に余白 */
+.atlas-lead-group {
+    margin-bottom: 40px;
+}
+
+/* 通常の説明文は細字 */
+.atlas-panel p:not(.atlas-lead) {
+    font-size: 18px;
+}
+
+.atlas-actions {
+    margin-top: 30px;
+    margin-bottom: 26px;
+}
+
+.follow-list-title {
+    color: #000;
+    font-size: 28px;
+    font-family: sans-serif;
+    margin-bottom: 12px;
+    margin-top: -10px;
+}
+
+.icon-divider {
+    margin-top: 36px;
+    margin-bottom: 20px;
+}
+
+.icon-list-wrapper {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    /* 左=見出し固定 / 右=リスト可変 */
+    margin-left: 80px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.follow-list-title {
+    margin: 10px;
+    white-space: nowrap;
+    font-size: 32px;
+}
+
+.icon-list {
+    margin-left: 80px;
 }

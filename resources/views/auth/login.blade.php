@@ -1,18 +1,24 @@
 <x-logout-layout>
+  <div class="atlas">
+    <p class="welcome">AtlasSNSへようこそ</p>
 
-  <!-- 適切なURLを入力してください -->
-  {!! Form::open(['url' => 'login']) !!}
+    {!! Form::open(['url' => 'login']) !!}
+    @csrf
+      <div class="form-group">
+        {{ Form::label('email', 'mail address') }}
+        {{ Form::text('email', null, ['class' => 'input']) }}
+      </div>
 
-  <p>AtlasSNSへようこそ</p>
+      <div class="form-group">
+        {{ Form::label('password', 'password') }}
+        {{ Form::password('password', ['class' => 'input']) }}
+      </div>
 
-  {{ Form::label('email') }}
-  {{ Form::text('email',null,['class' => 'input']) }}
-  {{ Form::label('password') }}
-  {{ Form::password('password',['class' => 'input']) }}
+      {{ Form::submit('LOGIN', ['class' => 'btn btn-danger']) }}
+    {!! Form::close() !!}
 
-  {{ Form::submit('ログイン') }}
-
-  {!! Form::close() !!}
-  <p><a href="register">新規ユーザーの方はこちら</a></p>
-
+    <p class="register-link">
+      <a href="register">新規ユーザーの方はこちら</a>
+    </p>
+  </div>
 </x-logout-layout>

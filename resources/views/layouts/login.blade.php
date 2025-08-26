@@ -24,7 +24,7 @@
   <!--OGPタグ/twitterカード-->
 </head>
 
-<body>
+<body class="login-layout">
   <header>
     @include('layouts.navigation')
   </header>
@@ -33,28 +33,40 @@
     <div id="container">
       {{ $slot }}
     </div>
-    <div id="side-bar">
-      <div id="confirm">
-        <p>〇〇さんの</p>
-        <div>
-          <p>フォロー数</p>
-          <p>〇〇名</p>
-        </div>
-        <p class="btn"><a href="followList">フォローリスト</a></p>
-        <div>
-          <p>フォロワー数</p>
-          <p>〇〇名</p>
-        </div>
-        <p class="btn"><a href="followerList">フォロワーリスト</a></p>
-      </div>
-      <p class="btn"><a href="search">ユーザー検索</a></p>
+    <!-- サイドバー内 -->
+<div id="side-bar">
+  <div id="confirm">
+    <p>{{ Auth::user()->username }}さんの</p>
+
+    <div>
+      <p>フォロー数&emsp;&emsp;{{ Auth::user()->followingCount() }}人</p>
     </div>
+    <p style="text-align: right;">
+  <a href="{{ route('showFollowings') }}" class="btn btn-primary">フォローリスト</a>
+</p>
+
+    <div>
+      <p>フォロワー数&emsp;{{ Auth::user()->followerCount() }}人</p>
+    </div>
+    <p style="text-align: right;">
+  <a href="{{ route('showFollowed') }}" class="btn btn-primary">フォロワーリスト</a>
+</p>
+
+    <!-- 横線 -->
+    <hr class="sidebar-divider" id="sidebarLimit">
+
+      <p class="user-search-button">
+  <a href="{{ route('users.search') }}" class="btn btn-primary">ユーザー検索</a>
+</p>
   </div>
+</div>
   <footer>
   </footer>
   <script src="{{ asset('js/app.js') }}"></script>
-  <script src="JavaScriptファイルのURL"></script>
-  <script src="JavaScriptファイルのURL"></script>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- 独自スクリプト -->
+  <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

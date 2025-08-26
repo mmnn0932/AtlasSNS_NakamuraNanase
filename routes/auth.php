@@ -9,24 +9,13 @@ use App\Http\Controllers\UsersController;
 
 
 Route::middleware('guest')->group(function () {
-
-    //ログイン
-    Route::get('login', [AuthenticatedSessionController::class, 'create']);//画面表示
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);//ログイン処理をしてtopに飛ぶ
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     //新規ユーザー登録
-    Route::get('register', [RegisteredUserController::class, 'create']);
-    Route::post('register', [RegisteredUserController::class, 'store']);//ユーザー登録処理
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register'); // 登録画面表示
+    Route::post('register', [RegisteredUserController::class, 'store'])->name('register.store'); // ユーザー登録処理
 
     //登録完了
-    Route::get('added', [RegisteredUserController::class, 'added']);
-    Route::post('added', [RegisteredUserController::class, 'added']);
-
-    //ログアウト
-    Route::get('logout', [AuthenticatedSessionController::class, 'logout']);
-    Route::post('logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
-//ログアウト処理
-
-    //Route::get通信(URI　URLの部品, [〇〇Controller::class, 'method']);
-
+    Route::get('added', [RegisteredUserController::class, 'added']);//登録完了画面表示
 });

@@ -1,10 +1,18 @@
 @charset "UTF-8";
 
-html{
+html,
+body {
     height: 100%;
 }
 
-body{
-    height: 100%;
-    background: #186AC9;
+.logout-page header {
+    height: auto !important;
+}
+
+.logout-page .sub-title {
+    margin: -10px 0 0;
+}
+
+.logout-page #container {
+    min-height: 100vh;
 }
