@@ -19,7 +19,7 @@ class ProfileController extends Controller
         $user = auth()->user();
         return view('profiles.profile', [
             'user' => $user,
-            'type' => 'A' // ここで 'A' をビューに渡している
+            'type' => 'A' // 'A' をビューに渡す
         ]);
     }
 
@@ -30,7 +30,6 @@ class ProfileController extends Controller
 
     // ログイン中ユーザーがフォローしているユーザーID一覧
     $followings = auth()->user()->followings()->pluck('users.id')->toArray();
-    // または ->pluck('id')->toArray()
 
     return view('profiles.profile', [
         'type'       => 'B',

@@ -91,15 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 送信ガード（action未設定や/indexならブロック）
+  // 送信ガード
   if (editForm) {
     editForm.addEventListener('submit', (e) => {
       const action = editForm.getAttribute('action') || '';
       const path   = action ? new URL(action, location.origin).pathname : '';
-      if (!action || path === '/index') {
-        e.preventDefault();
-        alert('編集URLが未設定です。投稿の編集ボタンから開いてください。');
-      }
     });
   }
 
@@ -108,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  // 閉じる（背景/×/ESC）
+  // 閉じる（背景）
   if (modalBg) modalBg.addEventListener('click', closeModal);
   document.querySelectorAll('.js-modal-close').forEach(el => el.addEventListener('click', closeModal));
   document.addEventListener('keydown', (e) => {

@@ -12,7 +12,6 @@
     <!-- 右側: 入力フォーム -->
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="profile-form">
       @csrf
-      @method('PUT')
 
       <div class="form-row">
         <label>user name</label>
@@ -64,7 +63,7 @@
 
 
     @elseif($type == 'B')
-<!-- プロフィールエリア -->
+<!-- プロフィール -->
 <div class="post-block typeB-profile" style="position: relative; padding-left: 110px;">
   <div class="post-header">
     <div class="post-left">

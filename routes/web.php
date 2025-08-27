@@ -44,13 +44,6 @@ Route::get('/posts/{id}/delete', [PostsController::class, 'delete'])->name('post
 Route::get('/followlist',   [FollowsController::class, 'showFollowings'])->name('followlist');
     Route::get('/followerlist', [FollowsController::class, 'showFollowed'])->name('followerlist');
 
-/*
-Route::get('showFollowings', [FollowsController::class, 'showFollowings'])->name('showFollowings');
-
-Route::get('showFollowed', [FollowsController::class, 'showFollowed'])
-
-    ->name('showFollowed'); */
-
 Route::post('/follow/{id}', [FollowsController::class, 'store'])->name('follow.store');
 Route::delete('/follow/{id}', [FollowsController::class, 'destroy'])->name('follow.destroy');
 
@@ -61,6 +54,6 @@ Route::get('/search/result', [UsersController::class, 'search'])->name('users.re
 Route::get('/profile', [ProfileController::class, 'pageA'])->name('profile');
 Route::get('/user/{id}', [ProfileController::class, 'pageB'])->name('pageB');
 
-Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 });

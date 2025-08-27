@@ -62,16 +62,18 @@ header .username {
 }
 
 header .dropdown-menu {
+    margin-top: 0 !important;
     text-align: center;
+    overflow: hidden;
 }
 
 header .dropdown-menu li {
-    margin: 26px 0;
+    margin: 0;
 }
 
 header .dropdown-menu li a {
     font-size: 30px;
-    padding: 10px 24px;
+    padding: 28px 24px;
     color: #888;
 }
 

@@ -52,13 +52,13 @@ document.addEventListener('DOMContentLoaded', function () {
     dropdownMenu.style.width = sbRect.width + 'px';
     dropdownMenu.style.top  = (hdRect.bottom + scrollY - headerTop) + 'px';
 
-    // 高さ：サイドバー内の横線（.sidebar-divider）までにしたい場合
+    // 高さ：サイドバー内の横線（.sidebar-divider）まで
     const divider = document.querySelector('#side-bar .sidebar-divider');
     if (divider) {
       const dvRect = divider.getBoundingClientRect();
       const maxPx = (dvRect.top + scrollY) - (hdRect.bottom + scrollY) - 8; // 余白8px
       if (maxPx > 100) { // 安全下限
-        dropdownMenu.style.maxHeight = maxPx + 'px';
+        dropdownMenu.style.maxHeight = '';
       }
     }
   }
@@ -80,9 +80,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // 画面サイズが変わったら再配置（開いているときだけ）
-  window.addEventListener('resize', function(){
-    if (dropdownMenu.classList.contains('show')) placeMenu();
-  });
 });
 </script>

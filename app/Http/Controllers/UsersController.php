@@ -10,10 +10,7 @@ use App\Models\Follow;
 
 class UsersController extends Controller
 {
-
-
-
-    // ユーザ検索ページ表示（初期表示）
+    // ユーザ検索ページ表示
 public function create() {
     $currentUserId = Auth::id();
     $followings = auth()->user()->followings()->pluck('followed_id')->toArray();
