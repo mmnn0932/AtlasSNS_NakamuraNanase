@@ -29,6 +29,7 @@ class FollowsController extends Controller
     return redirect()->back();
 }
 
+/*
 public function following(Request $request)
 {
     // 既にフォローしているか確認
@@ -46,6 +47,7 @@ public function following(Request $request)
 
 }
 }
+*/
 
 public function showFollowings()
 {
