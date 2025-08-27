@@ -46,7 +46,7 @@ class PostsController extends Controller
     return view('posts.index', ['posts' => $posts]);
 }
 
-
+/*
 public function edit($id)
 {
     // 渡されてきた記事IDのデータを取得
@@ -54,7 +54,7 @@ public function edit($id)
 
     return view('posts.index', ['post'=>$post]);
 }
-
+*/
 
 public function update(Request $request, $id)
 {

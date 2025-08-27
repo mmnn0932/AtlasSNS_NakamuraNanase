@@ -31,8 +31,10 @@ Route::post('store', [PostsController::class, 'store'])->name('posts.store');
 // 投稿一覧//投稿取得して表示
 Route::get('index', [PostsController::class, 'index'])->name('index');
 
+/*
 // 投稿編集
 Route::get('/posts/{id}/edit', [PostsController::class, 'edit'])->name('posts.edit');
+*/
 
 // 投稿更新
 Route::post('/posts/{id}/update', [PostsController::class, 'update'])->name('posts.update');
