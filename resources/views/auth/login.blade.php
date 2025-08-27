@@ -18,7 +18,7 @@
     {!! Form::close() !!}
 
     <p class="register-link">
-      <a href="register">新規ユーザーの方はこちら</a>
+      <a href="{{ route('register') }}">新規ユーザーの方はこちら</a>
     </p>
   </div>
 </x-logout-layout>

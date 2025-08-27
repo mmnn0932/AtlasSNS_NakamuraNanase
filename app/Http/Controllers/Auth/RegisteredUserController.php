@@ -44,6 +44,7 @@ class RegisteredUserController extends Controller
     // セッションにユーザーネームを保存して、次のページで表示
     return redirect('added')->with('username', $request->username);
 }
+
     public function added(): View
 {
     // セッションから username を取得し、ビューに渡す

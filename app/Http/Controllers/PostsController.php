@@ -74,7 +74,7 @@ public function update(Request $request, $id)
          Post::where('id', $id)->delete();
          return redirect()->route('index');
     }
-
+/*
     public function followList()
 {
     $user = Auth::user();
@@ -106,7 +106,7 @@ public function followerList()
         ->get();
 
     return view('follows.followerList', compact('posts', 'followers'));
-}
+}*/
 
 public function showFollowings()
 {

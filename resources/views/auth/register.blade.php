@@ -29,7 +29,7 @@
 
             {!! Form::close() !!}
 
-            <p class="login-link"><a href="login">ログイン画面に戻る</a></p>
+            <p class="login-link"><a href="{{ route('login') }}">ログイン画面に戻る</a></p>
         </div>
     </section>
 </x-logout-layout>
