@@ -649,6 +649,17 @@ body.login-layout .btn {
     margin-bottom: 15px;
 }
 
+.typeB-header {
+    display: flex;
+    gap: 30px;
+}
+
+.typeB-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .post-block.typeB-profile {
     margin-top: 40px;
 }
