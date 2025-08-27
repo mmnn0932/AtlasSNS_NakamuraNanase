@@ -47,43 +47,23 @@ public function following(Request $request)
 }
 }
 
- public function showFollowings()
+public function showFollowings()
 {
     $user = auth()->user();
-
-    // フォロー中ユーザーのID配列
-     $followingIds = $user->followings()->pluck('users.id');
-
-    // フォロー中ユーザーの情報
+    $followingIds = $user->followings()->pluck('users.id');
     $followings = $user->followings;
+    $posts = Post::with('user')->whereIn('user_id', $followingIds)->latest()->get();
 
-    // フォロー中ユーザーの投稿一覧
-    $posts = Post::with('user')
-        ->whereIn('user_id', $followingIds)
-        ->latest()
-        ->get();
-
-    return view('follows.followList', compact('followings', 'posts', 'followingIds'));
+    return view('follows.followList', compact('followings', 'posts'));
 }
-
 
 public function showFollowed()
 {
     $user = auth()->user();
-
-    // フォロワーID
     $followerIds = $user->followers()->pluck('users.id');
-
-    // フォロワー一覧
     $followers = $user->followers;
-
-    // フォロワーの投稿（表示するなら）
-    $posts = Post::with('user')
-        ->whereIn('user_id', $followerIds)
-        ->latest()
-        ->get();
+    $posts = Post::with('user')->whereIn('user_id', $followerIds)->latest()->get();
 
     return view('follows.followerList', compact('followers', 'posts'));
 }
-
 }

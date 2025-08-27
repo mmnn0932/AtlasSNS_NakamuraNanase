@@ -33,8 +33,7 @@
         </div>
       </div>
     </div>
-
-    @if (!$loop->last) {{-- 最後の投稿以外にだけ線を表示 --}}
+    @if (!$loop->last)
       <hr class="section-divider">
     @endif
   @endforeach

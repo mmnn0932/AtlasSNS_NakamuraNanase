@@ -183,7 +183,6 @@ hr.section-divider:not(.form-divider) {
     margin-bottom: 16px;
 }
 
-/* 複数線 */
 .post-block {
     padding: 0px 30px 30px 150px;
     padding-bottom: 6px;
@@ -362,6 +361,53 @@ body.logout-page {
     margin-left: 50px;
 }
 
+.modal {
+    /* base は未定義なので追加 */
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+/* これ↑は新規。 .modal.is-active は既にあるなら追加しない */
+
+.modal__content textarea {
+    /* inline をCSSへ移動 */
+    width: 100%;
+    padding: 10px;
+    resize: vertical;
+}
+
+.modal-actions {
+    /* inline をCSSへ移動 */
+    margin-top: 10px;
+    text-align: center;
+}
+
+.modal-submit-btn {
+    /* モーダル専用ボタン */
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.modal-submit-btn img {
+    width: 32px;
+    height: auto;
+}
+
+.modal-submit-btn .hover {
+    display: none;
+}
+
+.modal-submit-btn:hover .default {
+    display: none;
+}
+
+.modal-submit-btn:hover .hover {
+    display: inline;
+}
 
 .modal.is-active {
     display: flex;
@@ -445,6 +491,10 @@ body.logout-page {
 .form-row textarea {
     border: 1px solid #000;
     width: 470px;
+}
+
+.profile-icon-area {
+    margin-top: 12px;
 }
 
 .profile-edit-container {

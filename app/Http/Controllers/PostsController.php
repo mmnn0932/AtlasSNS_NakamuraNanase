@@ -27,7 +27,6 @@ class PostsController extends Controller
         'user_id' => $userId,
     ]);
 
-    // 投稿後に同じページにリダイレクト
     return redirect()->route('index');
 }
 
