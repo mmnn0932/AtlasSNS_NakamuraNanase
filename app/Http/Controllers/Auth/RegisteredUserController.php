@@ -30,25 +30,39 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
 {
-    $request->validate([
-    'username' => ['required', 'min:2', 'max:12'],
-    'email' => ['required', 'email', 'min:5', 'max:40', 'unique:users'],
-    'password' => ['required', 'alpha_num', 'confirmed', 'min:8', 'max:20'],
-]);
-    User::create([
-        'username' => $request->username,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
+    $validated = $request->validate(
+        [
+            'username' => ['required','string','min:2','max:12'],
+            'email'    => ['required','string','email','min:5','max:40','unique:users,email'],
+            'password' => ['required','string','alpha_num','min:8','max:20','confirmed']
+        ],
+        [
+            'username.required' => 'ユーザー名を入力してください。',
+            'username.min'      => 'ユーザー名は2〜12文字で入力してください。',
+            'username.max'      => 'ユーザー名は2〜12文字で入力してください。',
+
+            'email.required'    => 'メールアドレスを入力してください。',
+            'email.email'       => 'メールアドレスの形式が正しくありません。',
+            'email.min'         => 'メールアドレスは5〜40文字で入力してください。',
+            'email.max'         => 'メールアドレスは5〜40文字で入力してください。',
+            'email.unique'      => 'このメールアドレスは既に使用されています。',
+
+            'password.required' => 'パスワードを入力してください。',
+            'password.alpha_num'=> 'パスワードは半角英数字のみで入力してください。',
+            'password.min'      => 'パスワードは8〜20文字で入力してください。',
+            'password.max'      => 'パスワードは8〜20文字で入力してください。',
+            'password.confirmed'=> 'パスワード（確認）が一致しません。'
+        ]
+    );
+
+    $user = User::create([
+        'username' => $validated['username'],
+        'email'    => $validated['email'],
+        'password' => Hash::make($validated['password'])
     ]);
 
-    // セッションにユーザーネームを保存して、次のページで表示
-    return redirect('added')->with('username', $request->username);
-}
+    event(new Registered($user));
 
-    public function added(): View
-{
-    // セッションから username を取得し、ビューに渡す
-    $username = session('username');
-    return view('auth.added', compact('username'));
+    return redirect()->route('added')->with('username', $validated['username']);
 }
 }

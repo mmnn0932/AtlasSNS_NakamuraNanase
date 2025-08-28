@@ -8,6 +8,9 @@
     <textarea name="post" placeholder="投稿内容を入力してください。"></textarea>
     <input type="image" src="{{ asset('images/post.png') }}" alt="投稿" class="post-submit">
   </div>
+  @error('post')
+  <p class="form-error">{{ $message }}</p>
+@enderror
 </form>
 <hr class="section-divider form-divider">
 
@@ -56,6 +59,10 @@
     <form id="editForm" method="POST">
       @csrf
       <textarea id="modalPost" name="post" rows="5"></textarea>
+
+      @if ($errors->update?->has('post'))
+        <p class="form-error">{{ $errors->update->first('post') }}</p>
+      @endif
 
       <div class="modal-actions">
         <button type="submit" class="modal-submit-btn edit-btn">

@@ -29,25 +29,6 @@ class FollowsController extends Controller
     return redirect()->back();
 }
 
-/*
-public function following(Request $request)
-{
-    // 既にフォローしているか確認
-    $check = Follow::where('following_id', Auth::id())
-                    ->where('followed_id', $request->user_id);
-
-    // まだフォローしていなければ、追加
-    if ($check->count() == 0) {
-    Follow::create([
-        'following_id' => Auth::id(),
-        'followed_id' => $request->user_id,
-    ]);
-} else {
-    $check->delete(); // 既にフォローしていたら解除
-
-}
-}
-*/
 
 public function showFollowings()
 {

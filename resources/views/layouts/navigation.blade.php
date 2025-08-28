@@ -12,7 +12,7 @@
     </button>
     <ul class="dropdown-menu">
       <li><a href="{{ route('index') }}">HOME</a></li>
-      <li><a href="{{ route('profile') }}">プロフィール編集</a></li>
+      <li><a href="{{ route('profile.edit') }}">プロフィール編集</a></li>
       <li><a href="{{ route('logout') }}">ログアウト</a></li>
     </ul>
   </div>

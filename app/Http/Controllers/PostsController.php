@@ -14,17 +14,20 @@ class PostsController extends Controller
 
     public function store(Request $request)
 {
-    $request->validate([
-    'post' => ['required', 'string', 'min:1', 'max:150'],
-]);
+    $validated = $request->validate(
+        [
+            'post' => ['required', 'string', 'min:1', 'max:150'],
+        ],
+        [
+            'post.required' => '投稿内容を入力してください。',
+            'post.min'      => '1文字以上で入力してください。',
+            'post.max'      => '150文字以内で入力してください。',
+        ]
+    );
 
-    // ログインユーザーのIDを取得
-    $userId = auth()->user()->id;
-
-    // 投稿を作成
     Post::create([
-        'post' => $request->input('post'),
-        'user_id' => $userId,
+        'post'    => $validated['post'],
+        'user_id' => auth()->id(),
     ]);
 
     return redirect()->route('index');
@@ -34,33 +37,30 @@ class PostsController extends Controller
 {
     $user = $request->user();
 
-    // フォロー中ユーザーのID（users.id）＋自分のIDをまとめる
     $followingIds = $user->followings()->pluck('users.id')->push($user->id);
 
-    // 投稿を取得（N+1回避のため user を同時ロード）
     $posts = Post::with('user')
-        ->whereIn('user_id', $followingIds)   // Collection のまま渡してOK
-        ->latest('posts.created_at')          // カラムを明示しておくと安全
+        ->whereIn('user_id', $followingIds)
+        ->latest('posts.created_at')
         ->get();
 
     return view('posts.index', ['posts' => $posts]);
 }
 
-/*
-public function edit($id)
-{
-    // 渡されてきた記事IDのデータを取得
-    $post = Post::where('id', $id)->first();
 
-    return view('posts.index', ['post'=>$post]);
-}
-*/
 
 public function update(Request $request, $id)
 {
-    $validated = $request->validate([
-        'post' => 'required|max:150',
-    ]);
+    $validated = $request->validate(
+        [
+            'post' => ['required', 'string', 'min:1', 'max:150'],
+        ],
+        [
+            'post.required' => '投稿内容を入力してください。',
+            'post.min'      => '1文字以上で入力してください。',
+            'post.max'      => '150文字以内で入力してください。',
+        ]
+    );
 
     $post = Post::findOrFail($id);
     $post->post = $validated['post'];

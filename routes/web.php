@@ -31,11 +31,6 @@ Route::post('store', [PostsController::class, 'store'])->name('posts.store');
 // 投稿一覧//投稿取得して表示
 Route::get('index', [PostsController::class, 'index'])->name('index');
 
-/*
-// 投稿編集
-Route::get('/posts/{id}/edit', [PostsController::class, 'edit'])->name('posts.edit');
-*/
-
 // 投稿更新
 Route::post('/posts/{id}/update', [PostsController::class, 'update'])->name('posts.update');
 
@@ -56,9 +51,11 @@ Route::get('search', [UsersController::class, 'create'])->name('users.search');
 Route::get('/search/result', [UsersController::class, 'search'])->name('users.result');
 
 
-Route::get('/profile', [ProfileController::class, 'pageA'])->name('profile');
-Route::get('/user/{id}', [ProfileController::class, 'pageB'])->name('pageB');
+  // 自分のプロフィール編集・更新
+    Route::get('/profile',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile',  [ProfileController::class, 'update'])->name('profile.update');
 
-Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    // 他ユーザーのプロフィール
+    Route::get('/users/{id}', [ProfileController::class, 'showUser'])->name('users.show');
 
 });

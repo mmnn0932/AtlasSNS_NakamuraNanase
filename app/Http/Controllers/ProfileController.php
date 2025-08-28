@@ -13,66 +13,74 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-
-    public function pageA()
+    public function edit(Request $request)
     {
-        $user = auth()->user();
-        return view('profiles.profile', [
-            'user' => $user,
-            'type' => 'A' // 'A' をビューに渡す
-        ]);
+        $user = $request->user();
+        return view('profiles.profile', compact('user'));
     }
 
-    public function pageB($id)
+    public function update(Request $request)
 {
-    $user  = User::findOrFail($id); // 表示対象ユーザー（なければ404）
-    $posts = Post::where('user_id', $user->id)->latest('posts.created_at')->get();
+    $user = $request->user();
 
-    // ログイン中ユーザーがフォローしているユーザーID一覧
-    $followings = auth()->user()->followings()->pluck('users.id')->toArray();
+    $validated = $request->validate(
+        [
+            'username' => ['required','string','min:2','max:12'],
+            'email'    => ['required','string','email','min:5','max:40','unique:users,email,' . $user->id],
+            'password' => ['required','string','alpha_num','min:8','max:20','confirmed'],
 
-    return view('profiles.profile', [
-        'type'       => 'B',
-        'user'       => $user,
-        'posts'      => $posts,
-        'followings' => $followings,
-    ]);
-}
+            'bio'        => ['nullable','string','max:150',],
+            'icon_image' => ['nullable','mimes:jpg,jpeg,png,bmp,gif,svg']
+        ],
+        [
+            'username.required'   => 'ユーザー名を入力してください。',
+            'username.max'        => 'ユーザー名は2文字以上12文字以内で入力してください。',
 
-   public function update(Request $request)
-{
-    $user = auth()->user();
+            'email.required'      => 'メールアドレスを入力してください。',
+            'email.email'         => 'メールアドレスの形式が正しくありません。',
+            'email.max'           => 'メールアドレスは40文字以内で入力してください。',
+            'email.unique'        => 'このメールアドレスは既に使用されています。',
+            'password.min'        => 'パスワードは8文字以上20文字以内で入力してください。',
+            'password.confirmed'  => 'パスワード（確認）が一致しません。',
 
-    // バリデーション
-    $request->validate([
-        'username' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'bio' => 'nullable|string',
-        'icon_image' => 'nullable|image|max:2048',
-        'password' => 'nullable|string|min:8|confirmed',
-    ]);
+            'bio.string'          => '自己紹介は150文字以内で入力してください。',
 
-    // 更新処理
-    $user->username = $request->input('username');
-    $user->email = $request->input('email');
-    $user->bio = $request->input('bio');
+            'icon_image.mimes'      => '・アイコンは jpg、png、bmp、gif、svg の画像のみアップロードできます。'
+        ]
+    );
 
-    if ($request->filled('password')) {
-        $user->password = bcrypt($request->input('password'));
+    $user->username = $validated['username'];
+    $user->email    = $validated['email'];
+    $user->bio      = $validated['bio'] ?? null;
+
+    if (!empty($validated['password'])) {
+        $user->password = bcrypt($validated['password']);
     }
 
     if ($request->hasFile('icon_image')) {
-    $file = $request->file('icon_image');
-    $filename = time() . '_' . $file->getClientOriginalName();
-    // publicフォルダに保存
-    $file->move(public_path('images'), $filename);
-    $user->icon_image = $filename;
-}
+        $file = $request->file('icon_image');
+        $filename = time().'_'.$file->getClientOriginalName();
+        $file->move(public_path('images'), $filename);
+        $user->icon_image = $filename;
+    }
+
     $user->save();
 
-    return redirect()->route('profile')->with('success', 'プロフィールを更新しました');
+    return redirect()->route('profile.edit');
 }
 
+    public function showUser($id)
+{
+    $user  = User::findOrFail($id);
+    $posts = Post::with('user')
+        ->where('user_id', $user->id)
+        ->latest('posts.created_at')
+        ->get();
 
+    $viewer = auth()->user();
 
+    $isFollowing = $viewer->followings()->whereKey($user->id)->exists();
+
+    return view('users.show_user', compact('user', 'posts', 'isFollowing'));
+}
 }

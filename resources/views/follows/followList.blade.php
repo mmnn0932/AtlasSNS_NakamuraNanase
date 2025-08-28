@@ -3,7 +3,7 @@
   <h2 class="follow-list-title">Follow List</h2>
   <div class="icon-list">
     @foreach($followings as $followingUser)
-      <a href="{{ route('pageB', ['id' => $followingUser->id]) }}">
+      <a href="{{ route('users.show', ['id' => $followingUser->id]) }}">
         <img src="{{ asset('images/' . $followingUser->icon_image) }}"
              alt="ユーザーアイコン"
              class="user-icon">
@@ -19,7 +19,7 @@
     <div class="post-block">
       <div class="post-header">
         <div class="post-left">
-          <a href="{{ route('pageB', ['id' => $post->user->id]) }}">
+          <a href="{{ route('users.show', ['id' => $post->user->id]) }}">
             <img src="{{ asset('images/' . $post->user->icon_image) }}" class="user-icon">
           </a>
           <div class="post-user-info">

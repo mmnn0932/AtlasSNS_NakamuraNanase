@@ -3,21 +3,30 @@
         <div class="atlas">
             <p class="welcome">新規ユーザー登録</p>
 
-            {!! Form::open(['url' => 'register']) !!}
+            {!! Form::open(['url' => 'register', 'novalidate' => true]) !!}
 
             <div class="form-group">
                 {{ Form::label('username', 'user name') }}
                 {{ Form::text('username',null,['class' => 'input']) }}
+                 @error('username')
+            <div class="error-text">{{ $message }}</div>
+          @enderror
             </div>
 
             <div class="form-group">
                 {{ Form::label('email', 'mail address') }}
                 {{ Form::email('email',null,['class' => 'input']) }}
+                 @error('email')
+            <div class="error-text">{{ $message }}</div>
+          @enderror
             </div>
 
             <div class="form-group">
                 {{ Form::label('password', 'password') }}
                 {{ Form::password('password',['class' => 'input']) }}
+                @error('password')
+            <div class="error-text">{{ $message }}</div>
+          @enderror
             </div>
 
             <div class="form-group">
