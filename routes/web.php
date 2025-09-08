@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 Route::post('store', [PostsController::class, 'store'])->name('posts.store');
 
 // 投稿一覧//投稿取得して表示
-Route::get('index', [PostsController::class, 'index'])->name('index');
+Route::get('top', [PostsController::class, 'index'])->name('index');
 
 // 投稿更新
 Route::post('/posts/{id}/update', [PostsController::class, 'update'])->name('posts.update');
