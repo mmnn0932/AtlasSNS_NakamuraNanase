@@ -17,5 +17,5 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register.store'); // ユーザー登録処理
 
     //登録完了
-    Route::get('added', [RegisteredUserController::class, 'added']);//登録完了画面表示
+    Route::get('added', [RegisteredUserController::class, 'added'])->name('added');//登録完了画面表示
 });

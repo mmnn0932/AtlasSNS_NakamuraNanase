@@ -65,4 +65,10 @@ class RegisteredUserController extends Controller
 
     return redirect()->route('added')->with('username', $validated['username']);
 }
+
+    public function added(): View
+    {
+        $username = session('username');
+        return view('auth.added', compact('username'));
+    }
 }
