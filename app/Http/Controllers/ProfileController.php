@@ -25,25 +25,31 @@ class ProfileController extends Controller
 
     $validated = $request->validate(
         [
-            'username' => ['required','string','min:2','max:12'],
-            'email'    => ['required','string','email','min:5','max:40','unique:users,email,' . $user->id],
-            'password' => ['required','string','alpha_num','min:8','max:20','confirmed'],
+            'username' => ['required','min:2','max:12'],
+            'email'    => ['required','min:5','max:40','unique:users,email,' . $user->id,'email'],
+            'password' => ['required','alpha_num','min:8','max:20','confirmed'],
 
-            'bio'        => ['nullable','string','max:150',],
+            'bio'        => ['nullable','max:150',],
             'icon_image' => ['nullable','mimes:jpg,jpeg,png,bmp,gif,svg']
         ],
         [
             'username.required'   => 'ユーザー名を入力してください。',
+            'username.min'        => 'ユーザー名は2文字以上12文字以内で入力してください。',
             'username.max'        => 'ユーザー名は2文字以上12文字以内で入力してください。',
 
             'email.required'      => 'メールアドレスを入力してください。',
-            'email.email'         => 'メールアドレスの形式が正しくありません。',
-            'email.max'           => 'メールアドレスは40文字以内で入力してください。',
+            'email.min'           => 'メールアドレスは5文字以上40文字以内で入力してください。',
+            'email.max'           => 'メールアドレスは5文字以上40文字以内で入力してください。',
             'email.unique'        => 'このメールアドレスは既に使用されています。',
+            'email.email'         => 'メールアドレスの形式が正しくありません。',
+
+            'password.required'   => 'パスワードを入力してください。',
+            'password.alpha_num'   => 'パスワードを英数字で入力してください。',
             'password.min'        => 'パスワードは8文字以上20文字以内で入力してください。',
+            'password.max'        => 'パスワードは8文字以上20文字以内で入力してください。',
             'password.confirmed'  => 'パスワード（確認）が一致しません。',
 
-            'bio.string'          => '自己紹介は150文字以内で入力してください。',
+            'bio.max'          => '自己紹介は150文字以内で入力してください。',
 
             'icon_image.mimes'      => '・アイコンは jpg、png、bmp、gif、svg の画像のみアップロードできます。'
         ]

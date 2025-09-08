@@ -1,4 +1,14 @@
 <x-login-layout>
+  @if ($errors->any())
+        <div class="form-errors" role="alert" aria-live="polite">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
   <div class="profile-edit-container">
     <div class="profile-icon-area">
       @if($user->icon_image)
@@ -42,16 +52,6 @@
       <div class="form-row form-actions">
         <button type="submit" class="btn btn-danger">更新</button>
       </div>
-
-       @if ($errors->any())
-        <div class="form-errors" role="alert" aria-live="polite">
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
     </form>
   </div>
 </x-login-layout>
